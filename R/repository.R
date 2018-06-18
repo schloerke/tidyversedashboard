@@ -59,7 +59,6 @@ combine_summary_and_issues <- function(summary, issues) {
 #' @export
 #' @rdname org_data
 repo_data <- function(org, repo) {
-  message("org: ", org, " repo: ", repo)
   res <- graphql_query("repo_summary.graphql", org = org, repo = repo)
   res$data$repository$owner <- list(login = org)
 
