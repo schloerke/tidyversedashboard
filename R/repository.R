@@ -27,7 +27,7 @@ org_data <- function(org, privacy = c("PUBLIC", "PRIVATE", "BOTH")) {
 
   summary <- map_dfr(res, function(x) map_dfr(x$repositoryOwner$repositories$nodes, parse_summary_repository))
   issues <- map_dfr(res, function(x) map_dfr(x$repositoryOwner$repositories$nodes, parse_issues_repository))
-  
+
   combine_summary_and_issues(summary, issues)
 }
 num_label <- function(x, label) {
@@ -45,12 +45,12 @@ combine_summary_and_issues <- function(summary, issues) {
   } else {
     ch0 <- character(0)
     i0 <- integer(0)
-    issues_for_summary <- data_frame(owner = ch0, repo = ch0, p1 = i0, bugs = i0, features = i0, unlabled = i0)
+    issues_for_summary <- data_frame(owner = ch0, repo = ch0, p1 = i0, bugs = i0, features = i0, unlabeled = i0)
   }
-  
+
   summary <- left_join(summary, issues_for_summary) %>%
     replace_na(list(p1 = 0, bugs = 0, features = 0, unlabeled = 0))
-  
+
   list(summary = summary, issues = issues)
 }
 
@@ -64,6 +64,6 @@ repo_data <- function(org, repo) {
 
   summary <- parse_summary_repository(res$data$repository)
   issues <- parse_issues_repository(res$data$repository)
-  
+
   combine_summary_and_issues(summary, issues)
 }
