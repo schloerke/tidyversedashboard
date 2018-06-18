@@ -23,23 +23,48 @@ parse_summary_repository <- function(x) {
 org_data <- function(org, privacy = c("PUBLIC", "PRIVATE", "BOTH")) {
   privacy <- normalize_privacy(privacy)
 
-  res <- paginate(function(cursor, ...) graphql_query("repo_summary.graphql", org = org, cursor = cursor, privacy = privacy))
+  res <- paginate(function(cursor, ...) graphql_query("org_repo_summary.graphql", org = org, cursor = cursor, privacy = privacy))
 
   summary <- map_dfr(res, function(x) map_dfr(x$repositoryOwner$repositories$nodes, parse_summary_repository))
   issues <- map_dfr(res, function(x) map_dfr(x$repositoryOwner$repositories$nodes, parse_issues_repository))
+  
+  combine_summary_and_issues(summary, issues)
+}
+num_label <- function(x, label) {
+  sum(map_lgl(x, ~ any(.x == label)))
+}
 
-  summary <- left_join(
-    summary,
-    issues %>%
+combine_summary_and_issues <- function(summary, issues) {
+  if (nrow(as_data_frame(issues)) > 0) {
+    issues_for_summary <- issues %>%
       group_by(owner, repo) %>%
       summarize(p1 = sum(p1),
                 bugs = num_label(labels, "bug"),
                 features = num_label(labels, "feature"),
-                unlabeled = sum(lengths(labels) == 0))) %>%
+                unlabeled = sum(lengths(labels) == 0))
+  } else {
+    ch0 <- character(0)
+    i0 <- integer(0)
+    issues_for_summary <- data_frame(owner = ch0, repo = ch0, p1 = i0, bugs = i0, features = i0, unlabled = i0)
+  }
+  
+  summary <- left_join(summary, issues_for_summary) %>%
     replace_na(list(p1 = 0, bugs = 0, features = 0, unlabeled = 0))
-
+  
   list(summary = summary, issues = issues)
 }
-num_label <- function(x, label) {
-  sum(map_lgl(x, ~ any(.x == label)))
+
+
+#' @param repo repository belonging to the \code{org}
+#' @export
+#' @rdname org_data
+repo_data <- function(org, repo) {
+  message("org: ", org, " repo: ", repo)
+  res <- graphql_query("repo_summary.graphql", org = org, repo = repo)
+  res$data$repository$owner <- list(login = org)
+
+  summary <- parse_summary_repository(res$data$repository)
+  issues <- parse_issues_repository(res$data$repository)
+  
+  combine_summary_and_issues(summary, issues)
 }

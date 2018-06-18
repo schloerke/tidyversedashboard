@@ -2,14 +2,19 @@
 % Please edit documentation in R/repository.R
 \name{org_data}
 \alias{org_data}
+\alias{repo_data}
 \title{Compute an organization summary}
 \usage{
 org_data(org, privacy = c("PUBLIC", "PRIVATE", "BOTH"))
+
+repo_data(org, repo)
 }
 \arguments{
 \item{org}{A GitHub user, either a normal user or an organization}
 
 \item{privacy}{The repository privacy}
+
+\item{repo}{repository belonging to the \code{org}}
 }
 \description{
 Compute an organization summary

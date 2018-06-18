@@ -62,10 +62,23 @@ issue_progress <- function(org, start = today() - dweeks(1), privacy = c("PUBLIC
   if (!is.null(privacy)) {
     query <- glue::glue("{query} is:{tolower(privacy)}")
   }
+  issue_progress_query(query, org)
+}
+
+
+#' @param repo repository belonging to the \code{org}
+#' @rdname issue_progress
+#' @export
+repo_issue_progress <- function(org, repo, start = today() - dweeks(1)) {
+  query <- glue::glue("repo:{org}/{repo} updated:>={start} sort:updated-dsc")
+  issue_progress_query(query, org)
+}
+
+issue_progress_query <- function(query, org) {
   res <- paginate(function(cursor, ...) {
     graphql_query("weekly_issues.graphql", query = query, cursor = cursor)
   })
-
+  print(res)
   mutate(
     map_dfr(res, function(x) map_dfr(x$search$nodes, parse_weekly_issues)),
     owner = org)

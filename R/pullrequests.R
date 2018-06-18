@@ -48,3 +48,17 @@ org_pr <- function(org, privacy = c("PUBLIC", "PRIVATE", "BOTH")) {
     map_dfr(res, function(x) map_dfr(x$repositoryOwner$repositories$nodes, parse_pr_repository)),
     owner = org)
 }
+
+#' @param repo repository belonging to the \code{org}
+#' @export
+#' @rdname org_pr
+repo_pr <- function(org, repo) {
+  # privacy <- normalize_privacy(privacy)
+  
+  res <- paginate(function(cursor, ...) 
+    graphql_query("repo_pullrequests.graphql", org = org, repo = repo, cursor = cursor))
+  
+  mutate(
+    map_dfr(res, function(x) parse_pr_repository(x$repository)),
+    owner = org)
+}

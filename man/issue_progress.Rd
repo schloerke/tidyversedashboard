@@ -2,10 +2,13 @@
 % Please edit documentation in R/issue_progress.R
 \name{issue_progress}
 \alias{issue_progress}
+\alias{repo_issue_progress}
 \title{Retrieve opened and closed issues and pull requests since a given date}
 \usage{
 issue_progress(org, start = today() - dweeks(1), privacy = c("PUBLIC",
   "PRIVATE", "BOTH"))
+
+repo_issue_progress(org, repo, start = today() - dweeks(1))
 }
 \arguments{
 \item{org}{A GitHub user, either a normal user or an organization}
@@ -13,6 +16,8 @@ issue_progress(org, start = today() - dweeks(1), privacy = c("PUBLIC",
 \item{start}{Datetime to start query from}
 
 \item{privacy}{The repository privacy}
+
+\item{repo}{repository belonging to the \code{org}}
 }
 \description{
 Retrieve opened and closed issues and pull requests since a given date

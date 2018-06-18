@@ -2,14 +2,19 @@
 % Please edit documentation in R/pullrequests.R
 \name{org_pr}
 \alias{org_pr}
+\alias{repo_pr}
 \title{Compute an pull request reviewer summary}
 \usage{
 org_pr(org, privacy = c("PUBLIC", "PRIVATE", "BOTH"))
+
+repo_pr(org, repo)
 }
 \arguments{
 \item{org}{A GitHub user, either a normal user or an organization}
 
 \item{privacy}{The repository privacy}
+
+\item{repo}{repository belonging to the \code{org}}
 }
 \description{
 Compute an pull request reviewer summary
