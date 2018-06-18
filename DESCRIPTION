@@ -1,6 +1,6 @@
 Package: tidyversedashboard
 Title: Tidyverse activity dashboard
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: person("Jim", "Hester", email = "james.f.hester@gmail.com", role = c("aut", "cre"))
 Description: A dashboard to show repository activity in tidyverse organisations.
 Depends: R (>= 3.4)
