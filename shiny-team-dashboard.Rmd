@@ -88,7 +88,7 @@ p1 <- "\U0001f44d"
 ```
 
 ---
-title: "Shiny Team repo dashboard"
+title: "Shiny Team: `r duration`"
 ---
 
 
@@ -100,11 +100,12 @@ options(repos = c(CRAN='https://cloud.r-project.org'))
 pr_data <- repo_infos %>% pmap_dfr(repo_pr)
 
 if (!is.null(pr_data)) {
-  prs <- pr_data %>% filter(updated >= start) %>%
+  prs <- pr_data %>%
+    # filter(updated >= start) %>%
     mutate(reviewer = map2(reviews, comments, function(reviews, comments) unique(c(reviews$reviewer, comments$commenter)))) %>%
     select(owner, repo, issue, author, created, updated, reviewer) %>%
     unnest() %>%
-    filter(reviewer != author) %>%
+    # filter(reviewer != author) %>%
     mutate(
       reviewer = github_user_home(reviewer),
       author = github_user_home(author))
@@ -255,8 +256,8 @@ issue_progress_running <-
   )) %>% mutate(running_total = cumsum(count))
 
 ggplot(issue_progress_running, aes(event, running_total, linetype = type)) +
-  geom_step() + 
-  labs(x = NULL, y = "Issues", subtitle = "opened: positive; closed: negative") + 
+  geom_step() +
+  labs(x = NULL, y = "Issues", subtitle = "opened: positive; closed: negative") +
   theme(plot.subtitle = element_text(size = 5))
 ```
 
