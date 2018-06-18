@@ -1,42 +1,37 @@
-query repoSummary($org:String!, $privacy: RepositoryPrivacy, $cursor:String) {
-  repositoryOwner(login: $org) {
-    repositories(first:20, affiliations: OWNER, isFork: false, privacy: $privacy, after: $cursor) {
+query repoSummary($org:String!, $repo:String!) {
+  repository(name: $repo, owner: $org) {
+    repo:name,
+    owner {
+      login
+    }
+    open_issues : issues(first:100, states:OPEN) {
+      totalCount
       nodes {
-        owner {login},
-        repo:name,
-        open_issues : issues(first:100, states:OPEN) {
+        number
+        title
+        updatedAt
+        p1 : reactions(content:THUMBS_UP) {
           totalCount
+        }
+        labels(first:10) {
           nodes {
-            number
-            title
-            updatedAt
-            p1 : reactions(content:THUMBS_UP) {
-              totalCount
-            }
-            labels(first:10) {
-              nodes {
-                name
-              }
-            }
-          }
-          pageInfo {
-            issue_cursor : endCursor
-          }
-        }
-        prs : pullRequests(states:OPEN) {
-          totalCount
-        }
-        watchers : stargazers() {
-          totalCount
-        }
-        DESCRIPTION : object(expression: "master:DESCRIPTION") {
-          ... on Blob {
-            text
+            name
           }
         }
       }
       pageInfo {
-        endCursor
+        issue_cursor : endCursor
+      }
+    }
+    prs : pullRequests(states:OPEN) {
+      totalCount
+    }
+    watchers : stargazers() {
+      totalCount
+    }
+    DESCRIPTION : object(expression: "master:DESCRIPTION") {
+      ... on Blob {
+        text
       }
     }
   }

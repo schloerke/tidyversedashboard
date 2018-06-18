@@ -5,6 +5,7 @@ query weekly_issues($query: String!, $cursor: String) {
       ... on Issue {
         repository {
           name
+          owner
         }
         number
         closedAt

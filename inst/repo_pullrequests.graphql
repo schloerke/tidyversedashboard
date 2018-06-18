@@ -1,0 +1,34 @@
+query pullRequest($org:String!, $repo:String!, $cursor:String) {
+  repository(name: $repo, owner: $org) {
+    name
+    pullRequests(first: 25, orderBy: {field: UPDATED_AT, direction: DESC}, states: [OPEN], after: $cursor) {
+      nodes {
+        number
+        createdAt
+        updatedAt
+        author {
+          login
+        }
+        reviews(first:10) {
+          nodes{
+            author{
+              login
+            }
+            submittedAt
+          }
+        }
+        comments(first:100){
+          nodes{
+            author {
+              login
+            }
+            publishedAt
+          }
+        }
+      }
+      pageInfo {
+        endCursor
+      }
+    }
+  }
+}
