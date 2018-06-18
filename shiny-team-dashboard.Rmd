@@ -9,6 +9,9 @@ params:
     # - rstudio/shinycannon
     # - rstudio/pullthat
     # - rstudio/shinyloadtest
+    # - rstudio/gt
+    # - rstudio/fontawesome
+    # - rstudio/htmldeps
   start:
     label: Start date of report
     value: !r lubridate::today() - lubridate::ddays(30)
@@ -28,9 +31,6 @@ params:
     - rstudio/d3heatmap
     - rstudio/crosstalk
     - rstudio/flexdashboard
-    - rstudio/fontawesome
-    # - rstudio/gt
-    # - rstudio/htmldeps
     - rstudio/htmltools
     - rstudio/httpuv
     - rstudio/leaflet
@@ -46,7 +46,6 @@ params:
     - rstudio/shinytest
     - rstudio/shinythemes
     - rstudio/websocket
-
 editor_options:
   chunk_output_type: console
 ---
@@ -293,7 +292,7 @@ dt <- sparkline_table(
     )
   ),
   sparkline_column = which(colnames(summary_table) == "activity"),
-  colnames = c("52 week commit activity" = "activity"))
+  colnames = c("52 week conmmit activity" = "activity"))
 dt
 ```
 
