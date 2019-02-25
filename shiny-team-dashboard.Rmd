@@ -247,19 +247,51 @@ data_table(
 
 ### Issue status
 
-```{r}
+```{r issue_progress_img, fig.width=15, fig.height=9}
 issue_progress_running <-
-  issue_progress_table %>% group_by(type) %>% mutate(count = case_when(
-    type == "issue" & status == "closed" ~ -1,
-    type == "pull_request" &
-      (status == "merged" | status == "closed") ~ -1,
-    TRUE ~ 1
-  )) %>% mutate(running_total = cumsum(count))
+  issue_progress_table %>%
+    group_by(type) %>%
+    mutate(count = case_when(
+      type == "issue" & status == "closed" ~ -1,
+      type == "pull_request" &
+        (status == "merged" | status == "closed") ~ -1,
+      TRUE ~ 1
+    )) %>%
+    group_by(package) %>%
+    mutate(running_total = cumsum(count)) %>%
+    select(event, running_total, type, package)
 
-ggplot(issue_progress_running, aes(event, running_total, linetype = type)) +
-  geom_step() +
-  labs(x = NULL, y = "Issues", subtitle = "opened: positive; closed: negative") +
-  theme(plot.subtitle = element_text(size = 5))
+min_event_time_is_0 <- issue_progress_running %>%
+  group_by(package, type) %>%
+  summarize(
+    event = min(event),
+    running_total = 0
+  ) %>%
+  select(event, running_total, type, package)
+
+max_event_time <- issue_progress_running %>%
+  group_by(package, type) %>%
+  summarize(
+    event = max(event),
+    running_total = running_total[length(running_total)]
+  ) %>%
+  select(event, running_total, type, package)
+
+
+dplyr::bind_rows(
+  min_event_time_is_0,
+  issue_progress_running
+) %>%
+  ggplot(aes(event, running_total, color = type, linetype = type)) +
+    geom_hline(yintercept = 0, col = "grey80")+
+    geom_step(size = 1) +
+    geom_point(data = dplyr::bind_rows(min_event_time_is_0, max_event_time), size = 1.5) +
+    labs(x = NULL, y = "Issues", subtitle = "opened: positive; closed: negative") +
+    theme(plot.subtitle = element_text(size = 5), legend.position = "bottom") +
+    scale_color_manual(values = c("issue" = "#fc8d62", "pull_request" = "#66c2a5")) +
+    scale_linetype_manual(values = c("issue" = "F191", "pull_request" = "solid")) +
+    facet_wrap(~package, ncol = 5)
+
 ```
 
 > `r start` - `r now()`
