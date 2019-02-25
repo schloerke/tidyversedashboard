@@ -4,3 +4,6 @@
 .Ruserdata
 _ignore
 rsconnect
+shiny-team-dashboard_cache
+shiny-team-dashboard_files
+shiny-team-dashboard.html

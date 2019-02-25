@@ -1,2 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^rsconnect
+^shiny-team-dashboard_cache
+^shiny-team-dashboard_files
