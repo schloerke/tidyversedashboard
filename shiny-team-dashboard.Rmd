@@ -6,12 +6,6 @@ output:
     theme: paper
     source_code: "https://github.com/schloerke/shinyteamdashboard"
 params:
-    # - rstudio/shinycannon
-    # - rstudio/pullthat
-    # - rstudio/shinyloadtest
-    # - rstudio/gt
-    # - rstudio/fontawesome
-    # - rstudio/htmldeps
   start:
     label: Start date of report
     value: !r lubridate::today() - lubridate::ddays(30)
@@ -26,11 +20,15 @@ params:
   #   choices: [PUBLIC]
   #   originalChoices: [PUBLIC, PRIVATE, BOTH]
   repos:
+    # - rstudio/pullthat
+    # - rstudio/htmldeps
     - r-lib/later
     - trestletech/plumber
-    - rstudio/d3heatmap
+    - rstudio/chromote
     - rstudio/crosstalk
+    - rstudio/d3heatmap
     - rstudio/flexdashboard
+    - rstudio/gt
     - rstudio/htmltools
     - rstudio/httpuv
     - rstudio/leaflet
@@ -39,10 +37,13 @@ params:
     - rstudio/profvis
     - rstudio/promises
     - rstudio/rmarkdown
+    - rstudio/sass
     - rstudio/shiny
     - rstudio/shiny-server
     - rstudio/shiny-examples
+    - rstudio/shinycannon
     - rstudio/shinydashboard
+    - rstudio/shinyloadtest
     - rstudio/shinytest
     - rstudio/shinythemes
     - rstudio/websocket
