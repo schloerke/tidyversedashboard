@@ -203,7 +203,7 @@ valueBox(issue_opened_sum, icon = "fa-exclamation-circle", color = "success")
 
 ### Issues closed
 ```{r}
-valueBox(issue_closed_sum, icon = "fa-times-circle", color = "danger")
+valueBox(issue_closed_sum, icon = "fa-times-circle", color = "info")
 ```
 
 
