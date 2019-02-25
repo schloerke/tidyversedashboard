@@ -8,7 +8,7 @@ output:
 params:
   start:
     label: Start date of report
-    value: !r lubridate::today() - lubridate::ddays(30)
+    value: !r lubridate::today() - lubridate::ddays(60)
     input: date
   # orgs:
   #   label: GitHub organizations
