@@ -1,4 +1,5 @@
 ---
+title: "Shiny Team: 60 days"
 output:
   flexdashboard::flex_dashboard:
     orientation: rows
@@ -88,9 +89,6 @@ repo_infos <-
 p1 <- "\U0001f44d"
 ```
 
----
-title: "Shiny Team: `r duration`"
----
 
 
 ```{r pr_stats, include=FALSE, cache=on_macos}
@@ -198,7 +196,7 @@ valueBox(pr_open, icon = "fa-exclamation-circle")
 
 ### Issues opened
 ```{r}
-valueBox(issue_opened_sum, icon = "fa-exclamation-circle", color = "success")
+valueBox(issue_opened_sum, icon = "fa-exclamation-circle", color = "info")
 ```
 
 ### Issues closed
@@ -221,7 +219,7 @@ valueBox(issue_open, icon = "fa-exclamation-circle")
 Row
 -------------------------------------
 
-### `r duration` progess
+### `r duration` progess {data-width=1000}
 
 ```{r}
 issue_progress_table <- issue_data2 %>%
