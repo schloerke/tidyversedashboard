@@ -22,6 +22,9 @@ Imports:
     tidyr,
     gh,
     cranlogs,
-    magick
+    magick,
+    emo,
+    bindrcpp
 Remotes:
-  jeroen/curl
+  jeroen/curl,
+  hadley/emo
