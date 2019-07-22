@@ -25,6 +25,9 @@ params:
     # - rstudio/htmldeps
     - r-lib/later
     - trestletech/plumber
+    - ropensci/plotly
+    - rstudio-education/grader
+    - rstudio-education/ymlthis
     - rstudio/chromote
     - rstudio/crosstalk
     - rstudio/d3heatmap
@@ -47,6 +50,7 @@ params:
     - rstudio/shinycannon
     - rstudio/shinydashboard
     - rstudio/shinyloadtest
+    - rstudio/shinymeta
     - rstudio/shinytest
     - rstudio/shinythemes
     - rstudio/sortable
@@ -328,7 +332,7 @@ dt <- sparkline_table(
   summary_table,
   list(
     order = list(
-      list(1, "asc") # package alpha sort
+      list(7, "desc") # PR number descending sort
     )
   ),
   sparkline_column = which(colnames(summary_table) == "activity"),
