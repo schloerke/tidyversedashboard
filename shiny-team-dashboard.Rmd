@@ -82,7 +82,7 @@ repo_infos <-
   # c("rstudio/leaflet", "rstudio/shiny") %>%
   strsplit("/") %>%
   map_dfr(function(orgrepo) {
-    data_frame(org = orgrepo[[1]], repo = orgrepo[[2]])
+    tibble(org = orgrepo[[1]], repo = orgrepo[[2]])
   })
 
 # plus1 emoji
@@ -141,12 +141,12 @@ issue_data2 <- issue_data %>%
         type == "Issue" ~ "issue",
         type == "PullRequest" ~ "pull_request")),
 
-    status = factor(levels = c("opened", "closed", "merged"),
+    status = factor(levels = c("opened", "closed", "merged", "old"),
       case_when(
         merged >= start ~ "merged",
         closed >= start ~ "closed",
         opened >= start ~ "opened",
-        TRUE ~ NA_character_)),
+        TRUE ~ "old")),
     event = case_when(
       status == "merged" ~ merged,
       status == "closed" ~ closed,
@@ -155,7 +155,12 @@ issue_data2 <- issue_data %>%
 ```
 
 ````{r}
-totals <- issue_data2 %>% group_by(type, status) %>% tally() %>% mutate(n = if_else(status == "closed" | status == "merged", n * -1L, n)) %>% na.omit()
+totals <- issue_data2 %>%
+  filter(status != "old") %>%
+  group_by(type, status) %>%
+  tally() %>%
+  mutate(n = if_else(status == "closed" | status == "merged", n * -1L, n)) %>%
+  na.omit()
 ```
 
 Row
