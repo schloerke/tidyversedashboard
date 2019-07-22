@@ -1,6 +1,6 @@
 #' @importFrom purrr compact
 graphql_query <- function(json, ...) {
-  file <- system.file(json, package = "tidyversedashboard")
+  file <- system.file(json, package = "shinyteamdashboard")
   query <- readChar(file, file.info(file)$size)
   gh::gh("POST /graphql", query = query, variables = compact(list(...)))
 }
@@ -76,7 +76,7 @@ parse_datetime_8601 <- function(x) {
 
 #' Get org logo
 #'
-#' @param org 
+#' @param org
 #'
 #' @return writes the avatar as a local file logo.png
 #' @export
@@ -92,7 +92,7 @@ get_org_logo <- function(org){
 
 #' Get org name
 #'
-#' @param org Org or user login 
+#' @param org Org or user login
 #'
 #' @return string
 #' @export
