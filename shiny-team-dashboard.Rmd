@@ -33,10 +33,12 @@ params:
     - rstudio/htmltools
     - rstudio/httpuv
     - rstudio/leaflet
+    - rstudio/leaflet.providers
     - rstudio/learnr
     - rstudio/pool
     - rstudio/profvis
     - rstudio/promises
+    - rstudio/reactlog
     - rstudio/rmarkdown
     - rstudio/sass
     - rstudio/shiny
@@ -47,7 +49,9 @@ params:
     - rstudio/shinyloadtest
     - rstudio/shinytest
     - rstudio/shinythemes
+    - rstudio/sortable
     - rstudio/websocket
+    # - rstudio/yamlthis
 editor_options:
   chunk_output_type: console
 ---
