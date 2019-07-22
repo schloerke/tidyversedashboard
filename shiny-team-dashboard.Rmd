@@ -264,7 +264,7 @@ issue_progress_running <-
         (status == "merged" | status == "closed") ~ -1,
       TRUE ~ 1
     )) %>%
-    group_by(package) %>%
+    group_by(package, type) %>%
     mutate(running_total = cumsum(count)) %>%
     select(event, running_total, type, package)
 
