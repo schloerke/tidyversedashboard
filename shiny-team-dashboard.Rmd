@@ -27,7 +27,7 @@ params:
     - trestletech/plumber
     - ropensci/plotly
     - rstudio-education/grader
-    - rstudio-education/ymlthis
+    - r-lib/ymlthis
     - rstudio/chromote
     - rstudio/crosstalk
     - rstudio/d3heatmap
@@ -55,7 +55,6 @@ params:
     - rstudio/shinythemes
     - rstudio/sortable
     - rstudio/websocket
-    # - rstudio/yamlthis
 editor_options:
   chunk_output_type: console
 ---
