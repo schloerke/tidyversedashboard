@@ -56,7 +56,7 @@ library(purrr)
 library(tibble)
 library(codetools) # there was a weird error on connect that needed this
 library(DT)
-library(shinyteamdashboard)
+library(rmdteamdashboard)
 library(tidyr)
 library(sparkline)
 library(ggplot2)
