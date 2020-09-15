@@ -1,6 +1,6 @@
 #' @importFrom purrr compact
 graphql_query <- function(json, ...) {
-  file <- system.file(json, package = "shinyteamdashboard")
+  file <- system.file(json, package = "rmdteamdashboard")
   query <- readChar(file, file.info(file)$size)
   gh::gh("POST /graphql", query = query, variables = compact(list(...)))
 }
