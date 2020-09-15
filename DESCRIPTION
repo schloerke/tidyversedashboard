@@ -1,17 +1,18 @@
-Package: shinyteamdashboard
-Title: Shinyverse activity dashboard modeled after the Tidyverse activity dashboard
+Package: rmdteamdashboard
+Title: R Markdown activity dashboard modeled after the Tidyverse/Shiny Teams activity dashboard
 Version: 0.0.0.9000
 Authors@R: c(
       person("Jim", "Hester", email = "james.f.hester@gmail.com", role = c("aut", "ccp")),
-      person("Barret", "Schloerke", email = "james.f.hester@gmail.com", role = c("aut", "cre"))
+      person("Barret", "Schloerke", email = "james.f.hester@gmail.com", role = c("aut", "cre")),
+      person("Alison", "Hill", email = "alison@rstudio.com", role = c("aut"))
     )
-Description: A dashboard to show repository activity in the shiny organizations.
+Description: A dashboard to show repository activity in the R Markdown organizations.
 Depends: R (>= 3.4)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/schloerke/shinyteamdashboard
-BugReports: https://github.com/schloerke/shinyteamdashboard/issues
+URL: https://github.com/apreshill/rmdteamdashboard
+BugReports: https://github.com/apreshill/rmdteamdashboard/issues
 RoxygenNote: 6.0.1.9000
 Imports:
     dplyr,

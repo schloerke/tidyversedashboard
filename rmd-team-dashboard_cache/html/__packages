@@ -1,0 +1,15 @@
+base
+flexdashboard
+gh
+jsonlite
+lubridate
+dplyr
+purrr
+tibble
+codetools
+DT
+shinyteamdashboard
+tidyr
+sparkline
+ggplot2
+emo
