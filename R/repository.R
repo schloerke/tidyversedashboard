@@ -35,7 +35,7 @@ num_label <- function(x, label) {
 }
 
 combine_summary_and_issues <- function(summary, issues) {
-  if (nrow(as_data_frame(issues)) > 0) {
+  if (nrow(as_tibble(issues)) > 0) {
     issues_for_summary <- issues %>%
       group_by(owner, repo) %>%
       summarize(p1 = sum(p1),
@@ -45,7 +45,7 @@ combine_summary_and_issues <- function(summary, issues) {
   } else {
     ch0 <- character(0)
     i0 <- integer(0)
-    issues_for_summary <- data_frame(owner = ch0, repo = ch0, p1 = i0, bugs = i0, features = i0, unlabeled = i0)
+    issues_for_summary <- tibble(owner = ch0, repo = ch0, p1 = i0, bugs = i0, features = i0, unlabeled = i0)
   }
 
   summary <- left_join(summary, issues_for_summary) %>%

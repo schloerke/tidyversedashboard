@@ -29,5 +29,4 @@ Imports:
     emo,
     bindrcpp
 Remotes:
-  jeroen/curl,
   hadley/emo
