@@ -23,11 +23,12 @@ params:
   repos:
     # - rstudio/pullthat
     # - rstudio/htmldeps
+    - r-lib/fastmap
     - r-lib/later
-    - trestletech/plumber
     - ropensci/plotly
-    - rstudio-education/grader
+    - rstudio-education/gradethis
     - rstudio-education/ymlthis
+    - rstudio/bootstraplib
     - rstudio/chromote
     - rstudio/crosstalk
     - rstudio/d3heatmap
@@ -35,9 +36,11 @@ params:
     - rstudio/gt
     - rstudio/htmltools
     - rstudio/httpuv
+    - rstudio/jquerylib
     - rstudio/leaflet
     - rstudio/leaflet.providers
     - rstudio/learnr
+    - rstudio/plumber
     - rstudio/pool
     - rstudio/profvis
     - rstudio/promises
@@ -48,12 +51,17 @@ params:
     - rstudio/shiny-server
     - rstudio/shiny-examples
     - rstudio/shinycannon
+    - rstudio/shinycoreci-apps
+    - rstudio/shinycoreci
     - rstudio/shinydashboard
     - rstudio/shinyloadtest
     - rstudio/shinymeta
     - rstudio/shinytest
     - rstudio/shinythemes
+    - rstudio/shinyvalidate
     - rstudio/sortable
+    - rstudio/swagger
+    - rstudio/thematic
     - rstudio/websocket
     # - rstudio/yamlthis
 editor_options:
@@ -336,7 +344,8 @@ dt <- sparkline_table(
     )
   ),
   sparkline_column = which(colnames(summary_table) == "activity"),
-  colnames = c("52 week conmmit activity" = "activity"))
+  colnames = c("52 week conmmit activity" = "activity")
+)
 dt
 ```
 
